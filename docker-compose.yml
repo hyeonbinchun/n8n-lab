@@ -1,0 +1,15 @@
+services:
+  n8n:
+    image: docker.n8n.io/n8nio/n8n:2.47.3
+    ports:
+      - "127.0.0.1:5678:5678"   # 내 PC에서만 접근
+    environment:
+      N8N_HOST: localhost
+      N8N_PORT: 5678
+      N8N_PROTOCOL: http
+      WEBHOOK_URL: http://localhost:5678/  # 외부에서 n8n을 부를 주소 (Google 로그인 콜백 주소에 쓰임)
+    volumes:
+      - n8n_data:/home/node/.n8n   # SQLite DB + 설정 전부 여기 저장
+
+volumes:
+  n8n_data:
